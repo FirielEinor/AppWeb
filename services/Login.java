@@ -19,7 +19,7 @@ public class Login extends HttpServlet {
         out.println("<html>");
         
         out.println("<body bgcolor=\"white\">");
-        out.println("<h1>authentification réussi tester <a href ='http://localhost:8080/aviation/verif'>ici</a></h1>");
+        out.println("<h1>authentification réussi tester</h1>");
         out.println("</body>");
         out.println("</html>");
 	}

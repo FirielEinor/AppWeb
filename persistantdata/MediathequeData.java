@@ -1,5 +1,6 @@
 package persistantdata;
 
+import java.sql.*;
 import java.util.List;
 
 import mediatheque.*;
@@ -12,8 +13,21 @@ public class MediathequeData implements PersistentMediatheque {
 	static {
 		Mediatheque.getInstance().setData(new MediathequeData());
 	}
-
+	
+	private Connection conn;
+	
 	private MediathequeData() {
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@vs-oracle2:1521:ORCL","GRP207US10","GRP207US10");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	// renvoie la liste de tous les documents de la bibliothèque
