@@ -4,7 +4,7 @@ SET PAGESIZE 40
 
 PROMPT --> DEBUT DU SCRIPT
 
-REM ** Requête SQL de création des tables **
+REM ** Requete SQL de creation des tables **
 
 DROP TABLE UTILISATEUR CASCADE CONSTRAINTS PURGE
 /
@@ -37,7 +37,7 @@ ADD CONSTRAINT fk_NumEmprunteur
 	REFERENCES UTILISATEUR(idUser)
 	ON DELETE CASCADE
 
-REM ** Ordres SQL de création de Séquences  **
+REM ** Ordres SQL de creation de Sequences  **
 
 PROMPT CREATION DES SEQUENCES
 
