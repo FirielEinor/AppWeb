@@ -95,7 +95,7 @@ public class MediathequeData implements PersistentMediatheque {
 		try {
 			String req = "insert into DOCUMENT (idDoc, titreDoc, auteurDoc, typeDoc, numEmprunteur) values(seq_doc.next,2,";
 			for (int i = 0; i < args.length; i++) {
-				req += args[i];
+				req += args[i]+",";
 			}
 			req += ",'null')";
 			Statement st;
