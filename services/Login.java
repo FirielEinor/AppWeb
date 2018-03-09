@@ -32,7 +32,7 @@ public class Login extends HttpServlet {
         out.println("<html>");
         	out.println("<body>");
         		out.println(message);
-        		out.print("<form action=\" " + "AuthentificationServlet\" ");
+        		out.print("<form action= http://localhost:8080/ProjectWebJava/service ");
                 out.print("login\" ");
                 out.println("method=POST>");
                 out.println("Login:");

@@ -5,7 +5,6 @@ public class Utilisateur {
 	private String password;
 	
 	public Utilisateur(String login, String password) {
-		super();
 		this.login = login;
 		this.password = password;
 	}

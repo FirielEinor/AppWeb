@@ -45,8 +45,8 @@ public class MediathequeData implements PersistentMediatheque {
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
 			r.next();
-			String loginU = r.getString(0);
-			String passU = r.getString(1);
+			String loginU = r.getString(1);
+			String passU = r.getString(2);
 			if (loginU == null || passU == null)
 				return null;
 			return new Utilisateur(loginU,passU);
@@ -61,7 +61,28 @@ public class MediathequeData implements PersistentMediatheque {
 	// et le renvoie
 	// si pas trouvé, renvoie null
 	@Override
-	public Document getDocument(int numDocument) {
+	public Document getDocument(int numDocument) {	
+		try {
+			String req = "SELECT d.idDoc,d.titreDoc,d.auteurDoc,d.typeDoc,d.NumEmprunteur,u.loginuser,u.passworduser FROM DOCUMENT d,UTILISATEUR u WHERE idDoc = " + numDocument + " AND d.NumEmprunteur=u.idUser";
+			Statement st;
+			st = conn.createStatement();
+			ResultSet r = st.executeQuery(req);
+			r.next();
+			int type = r.getInt(3);
+			switch (type) {
+			case 1:
+				Document d = new Livre(r.getString(0), r.getString(2), r.getString(1), new Utilisateur(r.getString(4),r.getString(5)));
+				break;
+
+			default:
+				break;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return null;
 	}
 
