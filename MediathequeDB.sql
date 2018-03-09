@@ -26,4 +26,23 @@ CREATE TABLE DOCUMENTS
 	auteurDoc VARCHAR2(20)
 	typeDoc INTEGER
 )
-/	
+/
+
+REM ** Ordres SQL de création de Séquences  **
+
+PROMPT CREATION DES SEQUENCES
+
+DROP SEQUENCE seq_users
+/
+DROP SEQUENCE seq_doc
+/
+CREATE SEQUENCE seq_users start with 0 Minvalue 0
+/
+CREATE SEQUENCE seq_doc start with 0 Minvalue 0
+/
+
+PROMPT --> SCRIPT COMPLETEMENT TERMINE
+
+commit;
+
+SET FEEDBACK ON
