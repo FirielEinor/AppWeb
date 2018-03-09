@@ -32,8 +32,7 @@ public class Login extends HttpServlet {
         out.println("<html>");
         	out.println("<body>");
         		out.println(message);
-        		out.print("<form action=\"");
-                out.print("AuthentificationServlet\" ");
+        		out.print("<form action=\" " + "AuthentificationServlet\" ");
                 out.println("method=POST>");
                 out.println("Login:");
                 out.println("<input type=text size=20 name=login>");

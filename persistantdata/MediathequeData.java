@@ -26,8 +26,7 @@ public class MediathequeData implements PersistentMediatheque {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 
 	// renvoie la liste de tous les documents de la bibliothèque
@@ -40,7 +39,22 @@ public class MediathequeData implements PersistentMediatheque {
 	// si pas trouvé, renvoie null
 	@Override
 	public Utilisateur getUser(String login, String password) {
-		return null;
+		try {
+			String req = "SELECT * FROM UTILISATEUR WHERE LOGINUSER=" + login + " AND PASSWORDUSER=" + password;
+			Statement st;
+			st = conn.createStatement();
+			ResultSet r = st.executeQuery(req);
+			r.next();
+			String loginU = r.getString(0);
+			String passU = r.getString(1);
+			if (loginU == null || passU == null)
+				return null;
+			return new Utilisateur(loginU,passU);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// va récupérer le document de numéro numDocument dans la BD
