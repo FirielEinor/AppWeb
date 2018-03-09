@@ -27,7 +27,7 @@ CREATE TABLE DOCUMENT
 	titreDoc VARCHAR2(50),
 	auteurDoc VARCHAR2(20),
 	typeDoc INTEGER,
-	NumEmprunteur INTEGER
+	numEmprunteur INTEGER
 )
 /
 

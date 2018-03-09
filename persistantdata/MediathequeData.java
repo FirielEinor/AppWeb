@@ -62,6 +62,7 @@ public class MediathequeData implements PersistentMediatheque {
 	// si pas trouvé, renvoie null
 	@Override
 	public Document getDocument(int numDocument) {	
+		Document d = null;
 		try {
 			String req = "SELECT d.idDoc,d.titreDoc,d.auteurDoc,d.typeDoc,d.NumEmprunteur,u.loginuser,u.passworduser FROM DOCUMENT d,UTILISATEUR u WHERE idDoc = " + numDocument + " AND d.NumEmprunteur=u.idUser";
 			Statement st;
@@ -71,7 +72,7 @@ public class MediathequeData implements PersistentMediatheque {
 			int type = r.getInt(3);
 			switch (type) {
 			case 1:
-				Document d = new Livre(r.getString(0), r.getString(2), r.getString(1), new Utilisateur(r.getString(4),r.getString(5)));
+				d = new Livre(r.getString(0), r.getString(2), r.getString(1), new Utilisateur(r.getString(4),r.getString(5)));
 				break;
 
 			default:
@@ -83,7 +84,7 @@ public class MediathequeData implements PersistentMediatheque {
 		}
 		
 		
-		return null;
+		return d;
 	}
 
 	@Override
@@ -91,6 +92,20 @@ public class MediathequeData implements PersistentMediatheque {
 		// args[0] -> le titre
 		// args [1] --> l'auteur
 		// etc...
+		try {
+			String req = "insert into DOCUMENT (idDoc, titreDoc, auteurDoc, typeDoc, numEmprunteur) values(seq_doc.next,2,";
+			for (int i = 0; i < args.length; i++) {
+				req += args[i];
+			}
+			req += ",'null')";
+			Statement st;
+			st = conn.createStatement();
+			ResultSet r = st.executeQuery(req);
+			r.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
