@@ -74,7 +74,7 @@ public class MediathequeData implements PersistentMediatheque {
 			int type = r.getInt(3);
 			switch (type) {
 			case 1:
-				d = new Livre(r.getString(0), r.getString(2), r.getString(1), new Utilisateur(r.getString(4),r.getString(5)));
+				d = new Livre(r.getString(0), r.getString(2), r.getString(1), getUser(r.getString(4),r.getString(5)));
 				break;
 
 			default:

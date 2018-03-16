@@ -9,7 +9,7 @@ public class ServletInit extends HttpServlet {
 		// TODO Auto-generated method stub
 		super.init();
 		try {
-			Class.forName("MediathequeData");
+			Class.forName("persistantdata.MediathequeData");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
