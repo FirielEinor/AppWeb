@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 
 import mediatheque.Utilisateur;
 
-public class Login extends HttpServlet {
+public class addUser extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,7 +42,6 @@ public class Login extends HttpServlet {
                 out.println("<input type=text size=20 name=password>");
                 out.println("<br>");
                 out.println("<input type=submit>");
-                out.println("<input type=button value=\"nouvel utilisateur\" >");
                 out.println("</form>");
         	out.println("</body>");
         out.println("</html>");
