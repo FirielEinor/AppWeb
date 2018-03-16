@@ -17,7 +17,7 @@ CREATE TABLE UTILISATEUR
 (
 	idUser INTEGER CONSTRAINT pk_idUser PRIMARY KEY,
 	loginUser VARCHAR2(20),
-	passwordUser VARCHAR2(10)
+	passwordUser VARCHAR2(10),
 	typeUser VARCHAR2(10)
 )
 /
@@ -51,8 +51,11 @@ CREATE SEQUENCE seq_utilisateur start with 0 Minvalue 0
 CREATE SEQUENCE seq_doc start with 0 Minvalue 0
 /
 
+INSERT INTO UTILISATEUR (idUser, loginUser, passwordUser, typeUser) VALUES (seq_utilisateur.nextval, 'abonne', 'abonne', 'abonne');
+INSERT INTO UTILISATEUR (idUser, loginUser, passwordUser, typeUser) VALUES (seq_utilisateur.nextval, 'biblio', 'biblio', 'biblio');
+
 PROMPT --> SCRIPT COMPLETEMENT TERMINE
 
-commit;
+
 
 SET FEEDBACK ON
