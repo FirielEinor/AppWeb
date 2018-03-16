@@ -47,9 +47,11 @@ public class MediathequeData implements PersistentMediatheque {
 			r.next();
 			String loginU = r.getString(1);
 			String passU = r.getString(2);
+			String typeU = r.getString(3);
+			
 			if (loginU == null || passU == null)
 				return null;
-			return new Utilisateur(loginU,passU);
+			return new Utilisateur(loginU,passU,typeU);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
