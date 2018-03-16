@@ -16,6 +16,7 @@ public class Login extends HttpServlet {
     { 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+        
 
         String login = request.getParameter("login");
         String password = request.getParameter("mdp");
@@ -36,7 +37,7 @@ public class Login extends HttpServlet {
         		out.println(message);
         		out.print("<form action= http://localhost:8080/ProjectWebJava/service ");
                 out.print("login\" ");
-                out.println("method=POST>");
+                out.println("method=GET>");
                 out.println("Login:");
                 out.println("<input type=text size=20 name=login>");
                 out.println("<br>");
