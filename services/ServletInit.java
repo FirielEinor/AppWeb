@@ -9,6 +9,7 @@ public class ServletInit extends HttpServlet {
 	public void init(ServletConfig arg0) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init(arg0);
+		System.out.println("je passe ici!!!");
 		try {
 			Class.forName(arg0.toString());
 		} catch (ClassNotFoundException e) {
