@@ -18,4 +18,11 @@
 	<servlet-name>addUserServlet</servlet-name>
 	<url-pattern>/ajoutUser</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+	<servlet-name>Injection</servlet-name>
+	<servlet-class>services.SerletInit</servlet-class>
+	<load-on-startup>1</load-on-startup>
+  </servlet>
+	
 </web-app>
