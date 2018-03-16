@@ -22,11 +22,22 @@
   <servlet>
 	<servlet-name>Injection</servlet-name>
 	<servlet-class>services.SerletInit</servlet-class>
+
 	<init-param> 
 	 	<param-name>classToInit</param-name>
 	 	<param-value>persistantdata.mediathequeData</param-value> 
 	</init-param>  
 	<load-on-startup>1</load-on-startup>
   </servlet>
+
+
+  <servlet>
+	  <servlet-name>serviceServlet</servlet-name>
+	  <servlet-class>services.ServiceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>serviceServlet</servlet-name>
+	  <url-pattern>/service</url-pattern>
+  </servlet-mapping>
 	
 </web-app>
