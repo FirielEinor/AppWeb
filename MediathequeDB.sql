@@ -18,6 +18,7 @@ CREATE TABLE UTILISATEUR
 	idUser INTEGER CONSTRAINT pk_idUser PRIMARY KEY,
 	loginUser VARCHAR2(20),
 	passwordUser VARCHAR2(10)
+	typeUser VARCHAR2(10)
 )
 /
 

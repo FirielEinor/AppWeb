@@ -19,10 +19,12 @@ public class Login extends HttpServlet {
 
         String login = request.getParameter("login");
         String password = request.getParameter("mdp");
+        String type = request.getParameter("type");
         String message = "";
         
         if (login != null && password != null) {
-			Utilisateur utilisateur = new Utilisateur(login, password);
+			
+			Utilisateur utilisateur = new Utilisateur(login, password, type);
 			HttpSession sessionUtilisateur = request.getSession(true);
 			sessionUtilisateur.setAttribute("userId", utilisateur);
 			message = "<h1>Vous vous êtes identifié avec le login : " + login + "</h1>";
@@ -42,8 +44,10 @@ public class Login extends HttpServlet {
                 out.println("<input type=text size=20 name=password>");
                 out.println("<br>");
                 out.println("<input type=submit>");
-                out.println("<input type=button value=\"nouvel utilisateur\" >");
+                out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"nouvel utilisateur\"/></a>");
+
                 out.println("</form>");
+
         	out.println("</body>");
         out.println("</html>");
     }
