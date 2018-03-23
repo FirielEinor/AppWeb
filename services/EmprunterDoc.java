@@ -24,7 +24,7 @@ public class EmprunterDoc extends HttpServlet {
 		
 			
 			out.println("<h2>Choisissez un type de document</h2>");
-			out.print("<form action= http://localhost:8080/ProjectWebJava/emprunt>");
+			out.print("<form action= http://localhost:8080/ProjectWebJava/ConfirmEmprunt>");
 			
 			out.println("<select name ='type'>");
 			for (Document d : Mediatheque.getInstance().tousLesDocuments()){
