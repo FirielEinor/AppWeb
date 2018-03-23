@@ -36,11 +36,14 @@ public class DVD implements Document {
 	@Override
 	public void emprunter(Utilisateur a) throws EmpruntException {
 		// TODO Auto-generated method stub
+		if(this.u != null){
+			throw new EmpruntException();
+		}
 		try {
 			Class.forName(nomDriver);
 			connexion = DriverManager.getConnection(url,user,password);
 			Statement stVols = connexion.createStatement();
-			String reqVols = "UPDATE DOCUMENT SET numEmprunteur '= "+ a.getId() +"' WHERE idDoc = '"+ numDVD + "'";
+			String reqVols = "UPDATE DOCUMENT SET numEmprunteur = "+ a.getId() +" WHERE idDoc = "+ numDVD;
 			ResultSet resultats = stVols.executeQuery(reqVols);
 		} catch (Exception e) {
 			e.printStackTrace();

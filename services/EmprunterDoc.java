@@ -23,10 +23,10 @@ public class EmprunterDoc extends HttpServlet {
 		out.println("<body>");
 		
 			
-			out.println("<h2>Choisissez un type de document</h2>");
+			out.println("<h2>Choisissez un document</h2>");
 			out.print("<form action= http://localhost:8080/ProjectWebJava/ConfirmEmprunt>");
 			
-			out.println("<select name ='type'>");
+			out.println("<select name ='idDoc'>");
 			for (Document d : Mediatheque.getInstance().tousLesDocuments()){
 				out.println("<option value ='"+d.getId()+"'>"+d.getTitre()+"</option>");
 			}

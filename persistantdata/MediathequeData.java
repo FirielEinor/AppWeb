@@ -94,7 +94,7 @@ public class MediathequeData implements PersistentMediatheque {
 	// et le renvoie
 	// si pas trouvé, renvoie null
 	@Override
-	public Document getDocument(int numDocument) {	
+	public synchronized Document getDocument(int numDocument) {	
 		Document d = null;
 		try {
 			String req = "SELECT idDoc,titreDoc,NumEmprunteur FROM DOCUMENT WHERE idDoc = " + numDocument;
@@ -118,8 +118,8 @@ public class MediathequeData implements PersistentMediatheque {
 				req = "SELECT loginUser,passwordUser FROM UTILISATEUR WHERE idUser =" + numEmprunteur;
 				r = st.executeQuery(req);
 				if(r.next()){
-					String login = r.getString(0);
-					String pass = r.getString(1);
+					String login = r.getString(1);
+					String pass = r.getString(2);
 					u = getUser(login,pass);
 				}
 			}
@@ -152,7 +152,7 @@ public class MediathequeData implements PersistentMediatheque {
 	}
 
 	@Override
-	public void nouveauDocument(String type, Object... args) {
+	public synchronized void nouveauDocument(String type, Object... args) {
 		// args[0] -> le titre
 		// args [1] --> l'auteur
 		// etc...
