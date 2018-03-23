@@ -1,10 +1,12 @@
 package persistantdata;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import mediatheque.Document;
 import mediatheque.EmpruntException;
@@ -14,6 +16,7 @@ public class Livre implements Document {
 	String id;
 	String titre;
 	String auteur;
+	String nbPages;
 	Utilisateur u;
 	private String nomDriver = "oracle.jdbc.OracleDriver";
 	private String url = "jdbc:oracle:thin:@vs-oracle2:1521:ORCL";
@@ -22,10 +25,11 @@ public class Livre implements Document {
 	PreparedStatement st;
 	Connection connexion;
 	
-	public Livre(String id,String auteur,String titre,Utilisateur u){
+	public Livre(String id,String titre, String auteur, String nbPages, Utilisateur u){
 		this.id = id;
-		this.auteur = auteur;
 		this.titre = titre;
+		this.auteur = auteur;
+		this.nbPages = nbPages;
 		this.u = u;
 	}
 
@@ -58,7 +62,13 @@ public class Livre implements Document {
 
 	@Override
 	public Object[] affiche() {
-		return null;
+		Object[] livreData = null;		
+		livreData[0] = id;
+		livreData[1] = titre;
+		livreData[2] = auteur;
+		livreData[3] = nbPages;
+		livreData[4] = u;		
+		return livreData;
 	}
 
 }
