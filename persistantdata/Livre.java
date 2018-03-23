@@ -13,7 +13,7 @@ import mediatheque.EmpruntException;
 import mediatheque.Utilisateur;
 
 public class Livre implements Document {
-	String id;
+	int id;
 	String titre;
 	String auteur;
 	String nbPages;
@@ -25,8 +25,8 @@ public class Livre implements Document {
 	PreparedStatement st;
 	Connection connexion;
 	
-	public Livre(String id,String titre, String auteur, String nbPages, Utilisateur u){
-		this.id = id;
+	public Livre(int i,String titre, String auteur, String nbPages, Utilisateur u){
+		this.id = i;
 		this.titre = titre;
 		this.auteur = auteur;
 		this.nbPages = nbPages;

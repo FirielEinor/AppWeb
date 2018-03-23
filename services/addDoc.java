@@ -18,19 +18,36 @@ public class addDoc extends HttpServlet {
 		response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 		String type = request.getParameter("type");
-		
+		out.println("<html>");
+		out.println("<body>");
 		if(type == null){
-			out.println("<html>");
-        		out.println("<body>");
+			
         			out.println("<h2>Choisissez un type de document</h2>");
-        			out.println("<select name ='typeSelect'>");
-        			out.println("<option value ='DVD'>DVD<option>");
-        			out.println("<option value ='Livre'>Livre<option>");
+        			out.print("<form action= http://localhost:8080/ProjectWebJava/addDoc>");
+        			
+        			out.println("<select name ='type'>");
+        			for (String s : Mediatheque.getInstance().getTypesDoc()){
+        				out.println("<option value ='"+s+"'>"+s+"</option>");
+        			}
         			out.println("</select>");
-        			out.println("<a href=\"http://localhost:8080/ProjectWebJava/addDoc?type=" + request.getAttribute("type") +"\"><input type=button  value=\"ajouter un document\"/></a>");
-            	out.println("</body>");
-            out.println("</html>");
+        			out.println("<input type=submit>");
+        			out.println("</form>");
+            	
 		}
-		
+		else{
+			out.print("<form action= http://localhost:8080/ProjectWebJava/confirmAddDoc>");
+			out.println("Type du document");
+			out.println("<input name='type' type='text' value=" + type +" readonly>");		
+			List<String> listArg = Mediatheque.getInstance().getArgDoc(type);
+			
+			for(String s:listArg){
+				out.println(s + ":");
+				out.println("<input name='"+s+"' type='text'>");
+			}
+			out.println("<input type=submit>");
+			out.println("</form>");
+		}
+		out.println("</body>");
+        out.println("</html>");
 	}
 }

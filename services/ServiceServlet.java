@@ -35,7 +35,7 @@ public class ServiceServlet extends HttpServlet{
 	        	System.out.println(user.getType());
 	        	out.println("<h3>Bienvenue " + user.getLogin() + "</h3>");
 	        	if (user.getType().equals("biblio")){
-	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"ajouter un document\"/></a>");
+	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/addDoc\"><input type=button  value=\"ajouter un document\"/></a>");
 	        	}
 	        	else {
 	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"rendre document\"/></a>");

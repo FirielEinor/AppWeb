@@ -58,7 +58,13 @@ public class Mediatheque {
 		return data.tousLesDocuments();
 	}
 	
-
+	public List<String> getArgDoc(String type){
+		return data.getArgDoc(type);
+	}
+	
+	public List<String> getTypesDoc(){
+		return data.getTypesDoc();
+	}
 
 	// renvoie le user de login et passwd 
 	// si pas trouvé, renvoie null
@@ -74,9 +80,11 @@ public class Mediatheque {
 		return data.getDocument(numDocument);
 	}
 	
+	
+	
 	// ajoute un nouveau document
 
-	public void nouveauDocument(int type, Object... args ) {
+	public void nouveauDocument(String type, Object... args ) {
 		data.nouveauDocument(type, args);
 	};
 

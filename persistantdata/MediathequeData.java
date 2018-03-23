@@ -1,6 +1,7 @@
 package persistantdata;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import mediatheque.*;
@@ -76,7 +77,7 @@ public class MediathequeData implements PersistentMediatheque {
 	public Document getDocument(int numDocument) {	
 		Document d = null;
 		try {
-			String req = "SELECT d.idDoc,d.titreDoc,d.auteurDoc,d.typeDoc,d.NumEmprunteur,u.loginuser,u.passworduser FROM DOCUMENT d,UTILISATEUR u WHERE idDoc = " + numDocument + " AND d.NumEmprunteur=u.idUser";
+			String req = "SELECT d.idDoc,d.titreDoc,d.auteurDoc,d.typeDoc,d.nbPage,d.NumEmprunteur,u.loginuser,u.passworduser FROM DOCUMENT d,UTILISATEUR u WHERE idDoc = " + numDocument + " AND d.NumEmprunteur=u.idUser";
 			Statement st;
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
@@ -84,7 +85,7 @@ public class MediathequeData implements PersistentMediatheque {
 			int type = r.getInt(3);
 			switch (type) {
 			case 1:
-				d = new Livre(r.getString(0), r.getString(2), r.getString(1), getUser(r.getString(4),r.getString(5)));
+				d = new Livre(r.getInt(0), r.getString(1), r.getString(2),r.getString(3), getUser(r.getString(4),r.getString(5)));
 				break;
 
 			default:
@@ -100,24 +101,54 @@ public class MediathequeData implements PersistentMediatheque {
 	}
 
 	@Override
-	public void nouveauDocument(int type, Object... args) {
+	public void nouveauDocument(String type, Object... args) {
 		// args[0] -> le titre
 		// args [1] --> l'auteur
 		// etc...
 		try {
-			String req = "insert into DOCUMENT (idDoc, titreDoc, auteurDoc, typeDoc, numEmprunteur) values(seq_doc.next,2,";
-			for (int i = 0; i < args.length; i++) {
+			String req = "insert into DOCUMENT (idDoc, titreDoc, numEmprunteur) values(seq_doc.next,";
+			for (int i = 0; i <= 0; i++) {
 				req += args[i]+",";
-			}
+			} 
 			req += ",'null')";
 			Statement st;
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
-			r.next();
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public List<String> getArgDoc(String type){
+		List<String> listeArg = new ArrayList<String>();
+		listeArg.add("titreDoc");
+		switch (type) {
+		case "Livre":
+			listeArg.add("auteur");
+			listeArg.add("nbPage");
+			break;
+		case "DVD":
+			listeArg.add("realisateur");
+			listeArg.add("dureeMinute");
+		default:
+			break;
+		}
+		return listeArg;
+	}
+	
+	@Override
+	public List<String> getTypesDoc(){
+		List<String> types = new ArrayList<String>();
+		
+		//Les types sont coder en dur pour le moment mais a termes il peuvent probablement etre recuperer dans la base de données
+		types.add("DVD");
+		types.add("Livre");
+		
+		return types;		
 	}
 
 }
