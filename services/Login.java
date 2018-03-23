@@ -16,7 +16,7 @@ public class Login extends HttpServlet {
     { 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        
+        System.out.println("je passe dans login");
 
         String login = request.getParameter("login");
         String password = request.getParameter("mdp");

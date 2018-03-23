@@ -20,7 +20,9 @@ public class ServiceServlet extends HttpServlet{
 			PrintWriter out = response.getWriter();
 
 	        String login = request.getParameter("login");
-	        String password = request.getParameter("mdp");
+	        String password = request.getParameter("password");
+	        
+	        System.out.println(login + " " + password + " affichage");
 	        
 	        Mediatheque media = Mediatheque.getInstance();
 	        Utilisateur user = media.getUser(login, password);

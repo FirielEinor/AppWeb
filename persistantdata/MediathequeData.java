@@ -40,14 +40,23 @@ public class MediathequeData implements PersistentMediatheque {
 	@Override
 	public Utilisateur getUser(String login, String password) {
 		try {
-			String req = "SELECT * FROM UTILISATEUR WHERE LOGINUSER=" + login + " AND PASSWORDUSER=" + password;
+			System.out.println(login + " " + password + " Data SQL");
+			//String req = "SELECT * FROM UTILISATEUR WHERE LOGINUSER='" + login.toUpperCase() + "' AND PASSWORDUSER='" + password.toUpperCase() + "'";
+			
+			String req = "SELECT * FROM UTILISATEUR";
 			Statement st;
+			System.out.println(req);
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
-			r.next();
-			String loginU = r.getString(1);
-			String passU = r.getString(2);
-			String typeU = r.getString(3);
+			String loginU = null;
+			String passU = null;
+			String typeU = null;
+			while(r.next()){
+				System.out.println("je passe dans le next");
+				loginU = r.getString("loginUser");
+				passU = r.getString("passwordUser");
+				typeU = r.getString("typeUser");
+			}
 			
 			if (loginU == null || passU == null)
 				return null;

@@ -6,12 +6,13 @@ import javax.servlet.http.HttpServlet;
 
 public class ServletInit extends HttpServlet {
 	@Override
-	public void init(ServletConfig arg0) throws ServletException {
+	public void init() throws ServletException {
 		// TODO Auto-generated method stub
-		super.init(arg0);
+		super.init();
 		System.out.println("je passe ici!!!");
 		try {
-			Class.forName(arg0.toString());
+			//Class.forName(arg0.toString());
+			Class.forName("persistantdata.MediathequeData");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
