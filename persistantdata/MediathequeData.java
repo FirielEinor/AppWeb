@@ -118,7 +118,7 @@ public class MediathequeData implements PersistentMediatheque {
 			
 			req = "insert into" + type + "values(";
 			for (int i = 3; i <= Arg.size(); i++) {
-				req += Arg.get(i).toString()+",";
+				req += "'" +Arg.get(i).toString()+"',";
 			} 
 			st.execute(req);
 			
