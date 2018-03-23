@@ -1,5 +1,11 @@
 package persistantdata;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import mediatheque.Document;
 import mediatheque.EmpruntException;
 import mediatheque.Utilisateur;
@@ -10,7 +16,12 @@ public class DVD implements Document {
 	private String realisateur;
 	private int duree;
 	private Utilisateur u;
-	
+	private String nomDriver = "oracle.jdbc.OracleDriver";
+	private String url = "jdbc:oracle:thin:@vs-oracle2:1521:ORCL";
+	private String user = "GRP207US10";
+	private String password = "GRP207US10";
+	PreparedStatement st;
+	Connection connexion;
 
 	
 	
@@ -25,19 +36,41 @@ public class DVD implements Document {
 	@Override
 	public void emprunter(Utilisateur a) throws EmpruntException {
 		// TODO Auto-generated method stub
-
+		try {
+			Class.forName(nomDriver);
+			connexion = DriverManager.getConnection(url,user,password);
+			Statement stVols = connexion.createStatement();
+			String reqVols = "UPDATE DOCUMENT SET numEmprunteur '= "+ u +"' WHERE idDoc = '"+ numDVD + "'";
+			ResultSet resultats = stVols.executeQuery(reqVols);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void retour() {
 		// TODO Auto-generated method stub
-
+		try {
+			Class.forName(nomDriver);
+			connexion = DriverManager.getConnection(url,user,password);
+			Statement stVols = connexion.createStatement();
+			String reqVols = "UPDATE DOCUMENT SET numEmprunteur = null WHERE idDoc = "+ numDVD;
+			ResultSet resultats = stVols.executeQuery(reqVols);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Object[] affiche() {
 		// TODO Auto-generated method stub
-		return null;
+		Object[] DVDData = null;		
+		DVDData[0] = numDVD;
+		DVDData[1] = titreDVD;
+		DVDData[2] = realisateur;
+		DVDData[3] = duree;
+		DVDData[4] = u;		
+		return DVDData;
 	}
 
 }

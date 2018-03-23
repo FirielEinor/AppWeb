@@ -38,7 +38,7 @@ public class Livre implements Document {
 		// TODO Auto-generated method stub
 		try {
 			Class.forName(nomDriver);
-			Connection connexion = DriverManager.getConnection(url,user,password);
+			connexion = DriverManager.getConnection(url,user,password);
 			Statement stVols = connexion.createStatement();
 			String reqVols = "UPDATE DOCUMENT SET numEmprunteur '= "+ u +"' WHERE idDoc = '"+ id + "'";
 			ResultSet resultats = stVols.executeQuery(reqVols);
@@ -51,7 +51,7 @@ public class Livre implements Document {
 	public void retour() {
 		try {
 			Class.forName(nomDriver);
-			Connection connexion = DriverManager.getConnection(url,user,password);
+			connexion = DriverManager.getConnection(url,user,password);
 			Statement stVols = connexion.createStatement();
 			String reqVols = "UPDATE DOCUMENT SET numEmprunteur = null WHERE idDoc = "+ id;
 			ResultSet resultats = stVols.executeQuery(reqVols);
