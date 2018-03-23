@@ -71,4 +71,16 @@ public class Livre implements Document {
 		return livreData;
 	}
 
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return id;
+	}
+
+	@Override
+	public String getTitre() {
+		// TODO Auto-generated method stub
+		return titre;
+	}
+
 }

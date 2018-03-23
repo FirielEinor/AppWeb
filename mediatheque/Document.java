@@ -8,5 +8,6 @@ public interface Document {
 	void emprunter(Utilisateur a) throws EmpruntException;
 	void retour();
 	Object[] affiche();
-	
+	int getId();
+	String getTitre();
 }

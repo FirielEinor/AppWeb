@@ -73,4 +73,16 @@ public class DVD implements Document {
 		return DVDData;
 	}
 
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return numDVD;
+	}
+
+	@Override
+	public String getTitre() {
+		// TODO Auto-generated method stub
+		return titreDVD;
+	}
+
 }
