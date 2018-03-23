@@ -51,5 +51,25 @@
 	  <servlet-name>serviceServlet</servlet-name>
 	  <url-pattern>/service</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+	  <servlet-name>EmprunterDoc</servlet-name>
+	  <servlet-class>services.EmprunterDoc</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>EmprunterDoc</servlet-name>
+	  <url-pattern>/emprunt</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	  <servlet-name>RendreDoc</servlet-name>
+	  <servlet-class>services.RendreDoc</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>RendreDoc</servlet-name>
+	  <url-pattern>/rendre</url-pattern>
+  </servlet-mapping>
+  
+  
 	
 </web-app>

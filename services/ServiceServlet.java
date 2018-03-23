@@ -39,7 +39,7 @@ public class ServiceServlet extends HttpServlet{
 	        	}
 	        	else {
 	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"rendre document\"/></a>");
-	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"emprunter document\"/></a>");
+	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/emprunt\"><input type=button  value=\"emprunter document\"/></a>");
 	        	}
 	        }
 	    }
