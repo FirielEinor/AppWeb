@@ -40,7 +40,7 @@ public class Livre implements Document {
 			Class.forName(nomDriver);
 			connexion = DriverManager.getConnection(url,user,password);
 			Statement stVols = connexion.createStatement();
-			String reqVols = "UPDATE DOCUMENT SET numEmprunteur '= "+ u +"' WHERE idDoc = '"+ id + "'";
+			String reqVols = "UPDATE DOCUMENT SET numEmprunteur '= "+ a.getId() +"' WHERE idDoc = '"+ id + "'";
 			ResultSet resultats = stVols.executeQuery(reqVols);
 		} catch (Exception e) {
 			e.printStackTrace();

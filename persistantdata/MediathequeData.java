@@ -33,14 +33,16 @@ public class MediathequeData implements PersistentMediatheque {
 	// renvoie la liste de tous les documents de la bibliothèque
 	@Override
 	public List<Document> tousLesDocuments() {
-		List<Document> list = null;
+		List<Document> list = new ArrayList<Document>();
 		try {
 			String req = "SELECT idDoc FROM DOCUMENT";
 			Statement st;
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
-			if(r.next()){
-				list.add(getDocument(r.getInt(0)));
+			System.out.println(req);
+			while(r.next()){
+				System.out.println("je rentre dans boucle req de toutdoc idDoc = " + r.getInt("idDoc"));
+				list.add(getDocument(r.getInt("idDoc")));
 			}
 			
 		} catch (SQLException e) {
@@ -66,11 +68,13 @@ public class MediathequeData implements PersistentMediatheque {
 			System.out.println(req);
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
+			Integer id = null;
 			String loginU = null;
 			String passU = null;
 			String typeU = null;
 			while(r.next()){
 				System.out.println("je passe dans le next");
+				id = r.getInt("idUser");
 				loginU = r.getString("loginUser");
 				passU = r.getString("passwordUser");
 				typeU = r.getString("typeUser");
@@ -78,7 +82,7 @@ public class MediathequeData implements PersistentMediatheque {
 			
 			if (loginU == null || passU == null)
 				return null;
-			return new Utilisateur(loginU,passU,typeU);
+			return new Utilisateur(loginU,passU,typeU,id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,20 +97,24 @@ public class MediathequeData implements PersistentMediatheque {
 	public Document getDocument(int numDocument) {	
 		Document d = null;
 		try {
-			String req = "SELECT d.idDoc,d.titreDoc,d.NumEmprunteur FROM DOCUMENT d WHERE d.idDoc = " + numDocument;
+			String req = "SELECT idDoc,titreDoc,NumEmprunteur FROM DOCUMENT WHERE idDoc = " + numDocument;
 			Statement st;
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
 			
 			if(!r.next()){
+				System.out.println("passe !!");
 				return null;
 			}
-			int numDoc = r.getInt(0);
-			String titreDoc = r.getString(1);
+			int numDoc = r.getInt("idDoc");
+			System.out.println(numDoc);
+			String titreDoc = r.getString(2);
 			Integer numEmprunteur = r.getInt(3);
-			
+			System.out.println(titreDoc);
+			System.out.println(numEmprunteur);
 			Utilisateur u = null;
-			if (numEmprunteur != null){
+			if (numEmprunteur != 0){
+				System.out.println("rentre dans pas user");
 				req = "SELECT loginUser,passwordUser FROM UTILISATEUR WHERE idUser =" + numEmprunteur;
 				r = st.executeQuery(req);
 				if(r.next()){
@@ -115,18 +123,21 @@ public class MediathequeData implements PersistentMediatheque {
 					u = getUser(login,pass);
 				}
 			}
-			
+			System.out.println("arrive ici getDoc");
 			req = "SELECT * FROM DVD WHERE idDVD =" + numDoc;
 			r = st.executeQuery(req);
 			
 			if(r.next()){
-				d = new DVD(r.getInt(0),titreDoc,r.getString(1),r.getInt(2),u);
+				System.out.println("rentre dans DVD");
+				d = new DVD(r.getInt(1),titreDoc,r.getString(2),r.getInt(3),u);
 			}
 			else {
-				req = "SELECT * FROM LIVRE WHERE idDVD =" + numDoc;
+				System.out.println("rentre dans Livre");
+				req = "SELECT * FROM LIVRE WHERE idLivre =" + numDoc;
 				r = st.executeQuery(req);
 				if(r.next()){
-					d = new Livre(r.getInt(0), titreDoc, r.getString(1),r.getString(2), u);
+					System.out.println("trouve un livre : " +r.getInt("idLivre")+ " " + r.getString(2) + " " + r.getString(3));
+					d = new Livre(r.getInt("idLivre"), titreDoc, r.getString(2),r.getString(3), u);
 				}
 			}
 			
@@ -135,9 +146,9 @@ public class MediathequeData implements PersistentMediatheque {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+		System.out.println(d.getTitre());
 		return d;
+		
 	}
 
 	@Override

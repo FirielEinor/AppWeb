@@ -40,7 +40,7 @@ public class DVD implements Document {
 			Class.forName(nomDriver);
 			connexion = DriverManager.getConnection(url,user,password);
 			Statement stVols = connexion.createStatement();
-			String reqVols = "UPDATE DOCUMENT SET numEmprunteur '= "+ u +"' WHERE idDoc = '"+ numDVD + "'";
+			String reqVols = "UPDATE DOCUMENT SET numEmprunteur '= "+ a.getId() +"' WHERE idDoc = '"+ numDVD + "'";
 			ResultSet resultats = stVols.executeQuery(reqVols);
 		} catch (Exception e) {
 			e.printStackTrace();
