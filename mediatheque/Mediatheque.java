@@ -57,6 +57,8 @@ public class Mediatheque {
 	public List<Document> tousLesDocuments() {
 		return data.tousLesDocuments();
 	}
+	
+
 
 	// renvoie le user de login et passwd 
 	// si pas trouvé, renvoie null

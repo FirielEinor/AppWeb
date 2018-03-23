@@ -18,20 +18,8 @@ public class Login extends HttpServlet {
         PrintWriter out = response.getWriter();
         System.out.println("je passe dans login");
 
-        String login = request.getParameter("login");
-        String password = request.getParameter("mdp");
-        String type = request.getParameter("type");
-        String message = "";
-        
-        if (login != null && password != null) {
-			
-			Utilisateur utilisateur = new Utilisateur(login, password, type);
-			HttpSession sessionUtilisateur = request.getSession(true);
-			sessionUtilisateur.setAttribute("userId", utilisateur);
-			message = "<h1>Vous vous êtes identifié avec le login : " + login + "</h1>";
-		} else {
-			message = "<h1>Veuillez saisir votre login et votre mot de passe</h1>";
-		}
+		String message = "<h1>Veuillez saisir votre login et votre mot de passe</h1>";
+
         out.println("<html>");
         	out.println("<body>");
         		out.println(message);

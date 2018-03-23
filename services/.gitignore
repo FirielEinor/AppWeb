@@ -2,3 +2,6 @@
 /ServiceServlet.class
 /addUser.class
 /ServletInit.class
+/addDoc.class
+/EmprunterDoc.class
+/RendreDoc.class

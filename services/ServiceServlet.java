@@ -32,14 +32,14 @@ public class ServiceServlet extends HttpServlet{
 	        	out.print("<h4>Cliquez <a href=http://localhost:8080/ProjectWebJava/login>ici</a> pour retourner à la page de connection </h4>");
 	        }
 	        else{
+	        	System.out.println(user.getType());
 	        	out.println("<h3>Bienvenue " + user.getLogin() + "</h3>");
-	        	if (user.getType() == "biblio"){
-	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"nouvel utilisateur\"/></a>");
-	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"nouvel utilisateur\"/></a>");
+	        	if (user.getType().equals("biblio")){
+	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"ajouter un document\"/></a>");
 	        	}
 	        	else {
-	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"nouvel utilisateur\"/></a>");
-
+	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"rendre document\"/></a>");
+	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"emprunter document\"/></a>");
 	        	}
 	        }
 	    }
