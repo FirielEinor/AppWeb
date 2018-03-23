@@ -1,6 +1,9 @@
 package services;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,17 +15,31 @@ import mediatheque.Mediatheque;
 public class ConfirmAddDoc extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
 		String type = request.getParameter("type");
-		String titreDoc = request.getParameter("titreDoc");
-		if(type.equals("DVD")){
-			String real = request.getParameter("real");
-			int duree = Integer.parseInt(request.getParameter("Duree"));
-			Mediatheque.getInstance().nouveauDocument(type, titreDoc,real,duree);
+		
+		List<String> types = Mediatheque.getInstance().getArgDoc(type);
+		
+		List<Object> Arg = new ArrayList<Object>();
+		
+		for(String s:types){
+			Arg.add(request.getParameter(s));
 		}
-		else if(type.equals("Livre")){
-			String auteur = request.getParameter("auteur");
-			int nbPage = Integer.parseInt(request.getParameter("nbPage"));
-			Mediatheque.getInstance().nouveauDocument(type, titreDoc,auteur,nbPage);
-		}
+		System.out.println(Arg);
+		
+		Mediatheque.getInstance().nouveauDocument(type, Arg);
+		out.println("Document ajouter !! <a href='http://localhost:8080/ProjectWebJava/service");
+//		String titreDoc = request.getParameter("titreDoc");
+//		if(type.equals("DVD")){
+//			String real = request.getParameter("realisateur");
+//			int duree = Integer.parseInt(request.getParameter("duree"));
+//			Mediatheque.getInstance().nouveauDocument(type, titreDoc,real,duree);
+//		}
+//		else if(type.equals("Livre")){
+//			String auteur = request.getParameter("auteur");
+//			int nbPage = Integer.parseInt(request.getParameter("nbPage"));
+//			Mediatheque.getInstance().nouveauDocument(type, titreDoc,auteur,nbPage);
+//		}
 	}
 }

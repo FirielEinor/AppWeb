@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+  <servlet>
+	  <servlet-name>LoginServlet</servlet-name>
+	  <servlet-class>services.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>LoginServlet</servlet-name>
+	  <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	  <servlet-name>addDocServlet</servlet-name>
+	  <servlet-class>services.addDoc</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>addDocServlet</servlet-name>
+	  <url-pattern>/addDoc</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>addUserServlet</servlet-name>
+	<servlet-class>services.addUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>addUserServlet</servlet-name>
+	<url-pattern>/ajoutUser</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+	<servlet-name>Injection</servlet-name>
+	<servlet-class>services.ServletInit</servlet-class>
+	
+	
+	 
+	<init-param> 
+	 	<param-name>classToInit</param-name>
+	 	<param-value>persistantdata.MediathequeData</param-value> 
+	</init-param>
+	  
+	<load-on-startup>0</load-on-startup>
+  </servlet>
+
+
+  <servlet>
+	  <servlet-name>serviceServlet</servlet-name>
+	  <servlet-class>services.ServiceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>serviceServlet</servlet-name>
+	  <url-pattern>/service</url-pattern>
+  </servlet-mapping>
+	
+</web-app>

@@ -106,15 +106,21 @@ public class MediathequeData implements PersistentMediatheque {
 		// args [1] --> l'auteur
 		// etc...
 		try {
-			String req = "insert into DOCUMENT (idDoc, titreDoc, numEmprunteur) values(seq_doc.next,";
-			for (int i = 0; i <= 0; i++) {
-				req += args[i]+",";
+			String req = "insert into DOCUMENT (idDoc, titreDoc, numEmprunteur) values(";
+			List<Object> Arg = (List<Object>) args[0];
+			for (int i = 0; i <= 2; i++) {
+				req += Arg.get(i).toString()+",";
 			} 
 			req += ",'null')";
 			Statement st;
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
 			
+			req = "insert into" + type + "values(";
+			for (int i = 3; i <= Arg.size(); i++) {
+				req += Arg.get(i).toString()+",";
+			} 
+			st.execute(req);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -125,6 +131,7 @@ public class MediathequeData implements PersistentMediatheque {
 	@Override
 	public List<String> getArgDoc(String type){
 		List<String> listeArg = new ArrayList<String>();
+		listeArg.add("idDoc");
 		listeArg.add("titreDoc");
 		switch (type) {
 		case "Livre":
