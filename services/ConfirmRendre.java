@@ -19,6 +19,7 @@ public class ConfirmRendre extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int numDoc = Integer.parseInt(request.getParameter("idDoc"));
 		Mediatheque m = Mediatheque.getInstance();
+		System.out.println(m.getDocument(numDoc));
 		m.retour(m.getDocument(numDoc));
 		out.println("Document rendu !! <a href='http://localhost:8080/ProjectWebJava/service?login=" + session.getAttribute("login") + "&password=" + session.getAttribute("password")+"'>retour </a>");
 

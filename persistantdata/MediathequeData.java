@@ -99,7 +99,10 @@ public class MediathequeData implements PersistentMediatheque {
 			Statement st;
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
-			r.next();
+			
+			if(!r.next()){
+				return null;
+			}
 			int numDoc = r.getInt(0);
 			String titreDoc = r.getString(1);
 			Integer numEmprunteur = r.getInt(3);

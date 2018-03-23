@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RendreDoc extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		String type = request.getParameter("type");
 		
