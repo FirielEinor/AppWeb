@@ -77,20 +77,41 @@ public class MediathequeData implements PersistentMediatheque {
 	public Document getDocument(int numDocument) {	
 		Document d = null;
 		try {
-			String req = "SELECT d.idDoc,d.titreDoc,d.auteurDoc,d.typeDoc,d.nbPage,d.NumEmprunteur,u.loginuser,u.passworduser FROM DOCUMENT d,UTILISATEUR u WHERE idDoc = " + numDocument + " AND d.NumEmprunteur=u.idUser";
+			String req = "SELECT d.idDoc,d.titreDoc,d.NumEmprunteur FROM DOCUMENT d,WHERE d.idDoc = " + numDocument;
 			Statement st;
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
 			r.next();
-			int type = r.getInt(3);
-			switch (type) {
-			case 1:
-				d = new Livre(r.getInt(0), r.getString(1), r.getString(2),r.getString(3), getUser(r.getString(4),r.getString(5)));
-				break;
-
-			default:
-				break;
+			int numDoc = r.getInt(0);
+			String titreDoc = r.getString(1);
+			Integer numEmprunteur = r.getInt(3);
+			
+			Utilisateur u = null;
+			if (numEmprunteur != null){
+				req = "SELECT loginUser,passwordUser FROM UTILISATEUR WHERE idUser =" + numEmprunteur;
+				r = st.executeQuery(req);
+				if(r.next()){
+					String login = r.getString(0);
+					String pass = r.getString(1);
+					u = getUser(login,pass);
+				}
 			}
+			
+			req = "SELECT * FROM DVD WHERE idDVD =" + numDoc;
+			r = st.executeQuery(req);
+			
+			if(r.next()){
+				d = new DVD(r.getInt(0),titreDoc,r.getString(1),r.getInt(2),u);
+			}
+			else {
+				req = "SELECT * FROM LIVRE WHERE idDVD =" + numDoc;
+				r = st.executeQuery(req);
+				if(r.next()){
+					d = new Livre(r.getInt(0), titreDoc, r.getString(1),r.getString(2), u);
+				}
+			}
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,21 +127,27 @@ public class MediathequeData implements PersistentMediatheque {
 		// args [1] --> l'auteur
 		// etc...
 		try {
-			String req = "insert into DOCUMENT (idDoc, titreDoc, numEmprunteur) values(";
+			String req = "insert into DOCUMENT (idDoc, titreDoc, numEmprunteur) values(seq_doc.nextval,";
 			List<Object> Arg = (List<Object>) args[0];
-			for (int i = 0; i <= 2; i++) {
-				req += Arg.get(i).toString()+",";
-			} 
-			req += ",'null')";
+			req += "'" +Arg.get(0).toString()+"',";
+			req += "null)";
 			Statement st;
 			st = conn.createStatement();
 			System.out.println(req);
 			st.executeQuery(req);
 			
-			req = "insert into" + type + "values(";
-			for (int i = 3; i <= Arg.size(); i++) {
-				req += "'" +Arg.get(i).toString()+"',";
+			req = "insert into " + type + " values(seq_doc.currval,";
+			if(type.equals("Livre")){
+				req += "'" +Arg.get(1).toString()+"',";
+				req += Arg.get(2).toString()+")";
+				
 			}
+			else if(type.equals("DVD")){
+				req += "'" +Arg.get(1).toString()+"',";
+				req += Arg.get(2).toString()+")";
+				
+			}
+			
 			System.out.println(req);
 			st.execute(req);
 			
@@ -133,7 +160,6 @@ public class MediathequeData implements PersistentMediatheque {
 	@Override
 	public List<String> getArgDoc(String type){
 		List<String> listeArg = new ArrayList<String>();
-		listeArg.add("idDoc");
 		listeArg.add("titreDoc");
 		switch (type) {
 		case "Livre":
