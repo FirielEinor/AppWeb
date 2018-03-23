@@ -33,6 +33,14 @@ public class ServiceServlet extends HttpServlet{
 	        }
 	        else{
 	        	out.println("<h3>Bienvenue " + user.getLogin() + "</h3>");
+	        	if (user.getType() == "biblio"){
+	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"nouvel utilisateur\"/></a>");
+	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"nouvel utilisateur\"/></a>");
+	        	}
+	        	else {
+	        		out.println("<a href=\"http://localhost:8080/ProjectWebJava/ajoutUser\"><input type=button  value=\"nouvel utilisateur\"/></a>");
+
+	        	}
 	        }
 	    }
 }

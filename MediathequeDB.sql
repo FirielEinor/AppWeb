@@ -56,6 +56,6 @@ INSERT INTO UTILISATEUR (idUser, loginUser, passwordUser, typeUser) VALUES (seq_
 
 PROMPT --> SCRIPT COMPLETEMENT TERMINE
 
-
+commit;
 
 SET FEEDBACK ON

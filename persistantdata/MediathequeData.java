@@ -41,9 +41,9 @@ public class MediathequeData implements PersistentMediatheque {
 	public Utilisateur getUser(String login, String password) {
 		try {
 			System.out.println(login + " " + password + " Data SQL");
-			//String req = "SELECT * FROM UTILISATEUR WHERE LOGINUSER='" + login.toUpperCase() + "' AND PASSWORDUSER='" + password.toUpperCase() + "'";
+			String req = "SELECT * FROM UTILISATEUR WHERE LOGINUSER='" + login + "' AND PASSWORDUSER='" + password + "'";
 			
-			String req = "SELECT * FROM UTILISATEUR";
+			//String req = "SELECT idUser FROM UTILISATEUR";
 			Statement st;
 			System.out.println(req);
 			st = conn.createStatement();
