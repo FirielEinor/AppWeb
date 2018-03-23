@@ -35,39 +35,14 @@ public class MediathequeData implements PersistentMediatheque {
 	public List<Document> tousLesDocuments() {
 		List<Document> list = null;
 		try {
-			String req = "SELECT d.idDoc,d.titreDoc,d.NumEmprunteur FROM DOCUMENT d";
+			String req = "SELECT d.idDoc,d.titreDoc,l.auteur, v.realisateur,  d.NumEmprunteur FROM DOCUMENT d, LIVRE l, DVD v";
 			Statement st;
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
-			r.next();
-			int numDoc = r.getInt(0);
-			String titreDoc = r.getString(1);
-			Integer numEmprunteur = r.getInt(3);
-			
-			Utilisateur u = null;
-			if (numEmprunteur != null){
-				req = "SELECT loginUser,passwordUser FROM UTILISATEUR WHERE idUser =" + numEmprunteur;
-				r = st.executeQuery(req);
-				if(r.next()){
-					String login = r.getString(0);
-					String pass = r.getString(1);
-					u = getUser(login,pass);
-				}
-			}
-			
-			req = "SELECT * FROM DVD WHERE idDVD =" + numDoc;
-			r = st.executeQuery(req);
-			
 			if(r.next()){
-				list = (List<Document>) new DVD(r.getInt(0),titreDoc,r.getString(1),r.getInt(2),u);
+				
 			}
-			else {
-				req = "SELECT * FROM LIVRE WHERE idDVD =" + numDoc;
-				r = st.executeQuery(req);
-				if(r.next()){
-					list = (List<Document>) new Livre(r.getInt(0), titreDoc, r.getString(1),r.getString(2), u);
-				}
-			}
+			
 			
 			
 		} catch (SQLException e) {
