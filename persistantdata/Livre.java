@@ -1,6 +1,10 @@
 package persistantdata;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import mediatheque.Document;
 import mediatheque.EmpruntException;
@@ -11,7 +15,12 @@ public class Livre implements Document {
 	String titre;
 	String auteur;
 	Utilisateur u;
-	private Connection conn;
+	private String nomDriver = "oracle.jdbc.OracleDriver";
+	private String url = "jdbc:oracle:thin:@vs-oracle2:1521:ORCL";
+	private String user = "GRP207US10";
+	private String password = "GRP207US10";
+	PreparedStatement st;
+	Connection connexion;
 	
 	public Livre(String id,String auteur,String titre,Utilisateur u){
 		this.id = id;
@@ -23,7 +32,15 @@ public class Livre implements Document {
 	@Override
 	public void emprunter(Utilisateur a) throws EmpruntException {
 		// TODO Auto-generated method stub
-
+		try {
+			Class.forName(nomDriver);
+			Connection connexion = DriverManager.getConnection(url,user,password);
+			Statement stVols = connexion.createStatement();
+			String reqVols = "UPDATE DOCUMENT SET numEmprunteur '= "+ u +"' WHERE idDoc = '"+ id + "'";
+			ResultSet resultats = stVols.executeQuery(reqVols);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -34,7 +51,6 @@ public class Livre implements Document {
 
 	@Override
 	public Object[] affiche() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
