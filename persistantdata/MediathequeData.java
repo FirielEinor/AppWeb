@@ -35,15 +35,13 @@ public class MediathequeData implements PersistentMediatheque {
 	public List<Document> tousLesDocuments() {
 		List<Document> list = null;
 		try {
-			String req = "SELECT d.idDoc,d.titreDoc,l.auteur, v.realisateur,  d.NumEmprunteur FROM DOCUMENT d, LIVRE l, DVD v";
+			String req = "SELECT idDoc FROM DOCUMENT";
 			Statement st;
 			st = conn.createStatement();
 			ResultSet r = st.executeQuery(req);
 			if(r.next()){
-				
+				list.add(getDocument(r.getInt(0)));
 			}
-			
-			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
