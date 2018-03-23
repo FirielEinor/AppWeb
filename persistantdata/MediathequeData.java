@@ -114,12 +114,14 @@ public class MediathequeData implements PersistentMediatheque {
 			req += ",'null')";
 			Statement st;
 			st = conn.createStatement();
-			ResultSet r = st.executeQuery(req);
+			System.out.println(req);
+			st.executeQuery(req);
 			
 			req = "insert into" + type + "values(";
 			for (int i = 3; i <= Arg.size(); i++) {
 				req += "'" +Arg.get(i).toString()+"',";
-			} 
+			}
+			System.out.println(req);
 			st.execute(req);
 			
 		} catch (SQLException e) {

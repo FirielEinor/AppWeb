@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mediatheque.Mediatheque;
 import mediatheque.Utilisateur;
@@ -21,6 +22,10 @@ public class ServiceServlet extends HttpServlet{
 
 	        String login = request.getParameter("login");
 	        String password = request.getParameter("password");
+	        HttpSession session = request.getSession(true);
+	        session.setAttribute("login",login);
+			session.setAttribute("password",password);
+	        
 	        
 	        System.out.println(login + " " + password + " affichage");
 	        
